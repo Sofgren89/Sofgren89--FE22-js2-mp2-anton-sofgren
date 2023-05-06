@@ -3,6 +3,7 @@ import { tamagotchi } from "./modules/tamagotchi.js"
 const newTamagotchi = document.getElementById('submitButton')
 
 
+
 newTamagotchi.addEventListener('click',(event)=>{
   event.preventDefault()
   const select = document.getElementById("select");
@@ -70,10 +71,13 @@ newTamagotchi.addEventListener('click',(event)=>{
 
     if(currentStarve <= 0) {
       let deadTamagotchiMessage = document.createElement('h1')
-      deadTamagotchiMessage.innerHTML = `Your Tamagotchi is dead from hunger!`
+      deadTamagotchiMessage.innerHTML = `${inputName} the ${selectTamagotchi} is dead from hunger!`
       deadTamagotchiMessage.style.color='red'
       buttonForFood.disabled = true
       buttonForHappiness.disabled=true
+      clearInterval(intervalForHappiness);
+    
+
       clearInterval(intervalForStarve)
       document.body.append(deadTamagotchiMessage)
     }
@@ -95,15 +99,18 @@ getSetTamagotchi.setHappiness(currentHappiness --)
   
     if(currentHappiness <= 1) {
       let happinessDeadMessage = document.createElement('h1')
-      happinessDeadMessage.innerHTML = `You didn´t play with your Tamagotchi, and now it´s gone forever:(`
+      happinessDeadMessage.innerHTML = `You didn´t play with your Tamagotchi ${inputName} the ${selectTamagotchi}, and now it´s gone forever:(`
       happinessDeadMessage.style.color='red'
       buttonForHappiness.disabled = true
       buttonForFood.disabled = true
-      clearInterval(intervalForHappiness)
+      clearInterval(intervalForStarve);
+      clearInterval(intervalForHappiness);
+      
       document.body.append(happinessDeadMessage)
     }
     },3000)
 
 })
+
 
 
